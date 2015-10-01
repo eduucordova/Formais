@@ -1,6 +1,6 @@
-import unittest
+﻿import unittest
 
-from regular_sets.finite_automaton import DFA
+from finite_automaton import DFA
 
 class DFATests(unittest.TestCase):
     def setUp(self):
@@ -16,6 +16,7 @@ class DFATests(unittest.TestCase):
         """
         self.delta = {'q0': {'a': {'q1'}, 'b': {'q1'}}, 'q1': {'a': {'q0'}, 'b': {'q0'}}}
         self.dfa = DFA(self.delta, 'q0', ['q0'])
+        self.dfa.to_grammar()
 
     def test_accept_sentence(self):
         """

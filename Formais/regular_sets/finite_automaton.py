@@ -1,4 +1,4 @@
-
+﻿
 
 class DFA:
     """Class that encapsulates a DFA."""
@@ -27,4 +27,19 @@ class DFA:
         """
         return self.compute(self.initial_state, input_string) in self.accept_states
 
+    def to_grammar(self):
+        productions = dict()
+        temp = list()
 
+        for state in self.delta:
+            for transition in self.delta[state]:
+                for next_state in self.delta[state][transition]:
+                    if next_state in self.accept_states:
+                        temp.append(transition)
+                        temp.append(transition + next_state)
+                    else:
+                        temp.append(transition + next_state)
+            productions[state] = temp
+            temp = list()
+
+        return productions
