@@ -1,4 +1,4 @@
-﻿class RegularGrammar():
+﻿class regular_grammar():
     
     def __init__(self, non_terminals, terminals, dict_of_productions, initial_simbol):
         self.non_terminals = non_terminals
@@ -7,6 +7,9 @@
         self.initial_simbol = initial_simbol
 
     def __init__(self, x):
+        """ 
+        :param x: {string} grammar
+        """
         grammar = x.split(' ')
         initial_simbol = grammar[0]
         non_terminals = set()
@@ -37,10 +40,11 @@
         self.terminals = terminals
         self.productions = productionDict
         self.initial_simbol = initial_simbol
-
-        print(productionDict)
-
+        
     def to_automata(self):
+        """
+        :return: productions of automata
+        """
         states = self.non_terminals
         states.add('qAccept')
         delta = dict()

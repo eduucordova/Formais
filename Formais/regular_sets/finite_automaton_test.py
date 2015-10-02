@@ -1,5 +1,6 @@
 ﻿import unittest
 
+import finite_automaton
 from finite_automaton import DFA
 
 class DFATests(unittest.TestCase):
@@ -16,7 +17,6 @@ class DFATests(unittest.TestCase):
         """
         self.delta = {'q0': {'a': {'q1'}, 'b': {'q1'}}, 'q1': {'a': {'q0'}, 'b': {'q0'}}}
         self.dfa = DFA(self.delta, 'q0', ['q0'])
-        self.dfa.to_grammar()
 
     def test_accept_sentence(self):
         """
@@ -32,6 +32,14 @@ class DFATests(unittest.TestCase):
         is_accept = self.dfa.validate_sentence('ababa')
         self.assertFalse(is_accept)
 
+    def test_get_alphabet(self):
+        """
+        get alphabeth from DFA
+        alphabeth = {a, b}
+        """
+        #print()
+        sigma = finite_automaton.get_alphabet(self.dfa)
+        self.assertSetEqual({'a', 'b'}, sigma)
 
 if __name__ == '__main__':
     unittest.main()

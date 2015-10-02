@@ -1,4 +1,20 @@
 ﻿
+from functools import reduce
+
+
+def get_alphabet(machine):
+    """Returns the NFA's or DFA's input alphabet, generated on the fly.
+    execute 'or (union)' foreach two set elements from simbols
+
+    :param machine: {dict} NFA or DFA
+    :return:{set} alphabet
+    """
+    sigma = reduce(
+        (lambda a, b: set(a) | set(b)),
+        [x.keys() for x in machine.delta.values()]
+    )
+    return sigma
+
 
 class DFA:
     """Class that encapsulates a DFA."""
@@ -28,18 +44,19 @@ class DFA:
         return self.compute(self.initial_state, input_string) in self.accept_states
 
     def to_grammar(self):
+        """
+        :return: Productions of grammar
+        """
         productions = dict()
         temp = list()
 
-        for state in self.delta:
-            for transition in self.delta[state]:
-                for next_state in self.delta[state][transition]:
+        for current_state in self.delta: #each state
+            for alphabet_simbol in self.delta[current_state]: #each simbol of the alphabet
+                for next_state in self.delta[current_state][alphabet_simbol]: #each next state
                     if next_state in self.accept_states:
-                        temp.append(transition)
-                        temp.append(transition + next_state)
-                    else:
-                        temp.append(transition + next_state)
-            productions[state] = temp
+                        temp.append(alphabet_simbol)
+                    temp.append(alphabet_simbol + next_state)
+            productions[current_state] = temp
             temp = list()
 
         return productions
