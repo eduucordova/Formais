@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d4cff321-2646-40f8-94a6-ba6578313bf4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>formais.py</StartupFile>
+    <StartupFile>regular_sets\formais.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,11 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="automata.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="formais.py" />
-    <Compile Include="regular_grammar.py">
+    <Compile Include="regular_sets\formais.py" />
+    <Compile Include="regular_sets\regular_grammar.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="regular_sets\finite_automaton.py" />
